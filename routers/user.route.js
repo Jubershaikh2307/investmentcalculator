@@ -47,16 +47,14 @@ User.post("/getProfile", async (req, res) => {
 
 User.post("/calculate", async (req, res) => {
     const { p, i, y } = req.body
-    let temp1=i/100
-    temp1+=1
-    let f=(Number(p)*(temp1**y))
+    // F = P [({(1+i) ^n}-1)/i]
+    let temp=1+(i/100)
+    let temp1=temp**y
+    let temp3=((temp1-1)/(i/100))
+    let f=p*temp3
     let ti=Number(p)*y
-    let tm=ti-f
+    let tm=f-ti
     return res.send({f,ti,tm})
-    // console.log(Number(p)*(temp1/(i/100)))
-    // let f= 100000*(((1 + 0.071) ^ 15)-1)/0.071
-    // console.log(f);
-    // res.send(f)
 
 })
 
